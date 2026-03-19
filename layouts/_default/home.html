@@ -1,0 +1,197 @@
+{{ define "main" }}
+<!-- Hero / Services illustration section -->
+<section class="content-grid overlay-backdrop mt-[5.25rem]">
+  <div
+    class="flex flex-col md:flex-row items-center mt-[3.25rem] mb-8 space-y-8 md:space-y-0"
+  >
+    <img
+      src="/images/services-illustration.png"
+      class="md:w-[513px] md:h-[452px] md:order-2"
+      alt="Services illustration"
+    />
+    <div>
+      <p class="section-heading">
+        Who We Are
+      </p>
+      <p class="mt-8">
+        We are Optimum BH - A cutting edge software development agency
+        specializing in Full-stack development with a focus on web and mobile
+        applications built on top of PETAL stack.
+      </p>
+      <a
+        href="/#services-section"
+        class="text-white"
+        id="services-section-hero-anchor"
+      >
+        <button class="btn-primary mt-10">
+          OUR SERVICES
+        </button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <div
+    class="full-width content-grid bg-[#FAF9FF] pt-[3.25rem] space-y-12"
+    id="services-section"
+  >
+    <p class="section-heading">
+      What We Do
+    </p>
+    <p>
+      At Optimum BH, we are dedicated to pushing the boundaries of software
+      development, delivering solutions that empower businesses to thrive in the
+      digital landscape.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-14 px-6">
+      <div class="service-card shadow-lg bg-gradient-to-b from-[#261687] to-[#20BDFF]">
+        <p class="service-card-title">Web app development</p>
+        <p class="service-card-body">
+          We create dynamic and user-friendly web applications tailored to meet
+          your specific needs and objectives.
+        </p>
+      </div>
+      <div class="service-card shadow-lg shadow-[#F3F1F8] bg-white">
+        <p class="service-card-title">Mobile app development</p>
+        <p class="service-card-body">
+          We design and develop mobile applications that captivate users,
+          delivering an unparalleled experience across iOS and Android
+          platforms.
+        </p>
+      </div>
+      <div class="service-card shadow-xl bg-gradient-to-b from-[#5337FF] to-[#7D289A]">
+        <p class="service-card-title">Maintenance and support</p>
+        <p class="service-card-body">
+          Our commitment doesn't end with deployment. We provide ongoing
+          maintenance and support to ensure your applications remain up-to-date,
+          secure, and optimized for peak performance.
+        </p>
+      </div>
+    </div>
+    <div class="flex items-center justify-center">
+      <a href="/#portfolio-section" id="portfolio-section-hero-anchor">
+        <button class="btn-primary my-16">
+          OUR PORTFOLIO
+        </button>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Section -->
+<section class="content-grid overlay-backdrop text-[1.25rem] md:text-[1.7rem] text-[#3A393A]">
+  <div class="font-montserrat font-normal text-[#3a393a] leading-relaxed">
+    <h2
+      class="mt-12 md:mt-24 mb-0 text-center text-[1.5rem] md:text-4xl text-[#1D1D1D] font-semibold"
+      id="blog-section"
+    >
+      Blog Articles
+    </h2>
+    {{ $allPosts := where .Site.RegularPages "Type" "blog" }} {{ $pageSize := 6
+    }} {{ $lastIndex := sub (len $allPosts) 1 }} {{ $totalPages := add (div
+    $lastIndex $pageSize) 1 }}
+
+    <div id="blog-cards-container" class="cards-grid mt-10 md:mt-20">
+      {{ range $i, $post := $allPosts }} {{ $pageNum := add (div $i $pageSize) 1
+      }}
+      <div
+        data-blog-page="{{ $pageNum }}"
+        class="{{ if gt $pageNum 1 }}hidden{{ end }}"
+      >
+        {{ partial "blog-card.html" $post }}
+      </div>
+      {{ end }}
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Pagination navigation" class="mt-12">
+      <ul
+        class="flex items-center justify-center pagination-links gap-x-4"
+        id="pagination-controls"
+      >
+        {{ range $p := seq 1 $totalPages }}
+        <li
+          class="cursor-pointer border-b border-transparent px-3 {{ if eq $p 1 }}active-pagination-link{{ end }}"
+          data-page="{{ $p }}"
+        >
+          <span>{{ $p }}</span>
+        </li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Portfolio Section -->
+  <div class="portfolio-section">
+    <h2 class="portfolio-section-heading" id="portfolio-section">Portfolio</h2>
+    <div>
+      <ul class="pb-8" id="slideshow">
+        {{ range $i, $project := .Site.Data.projects }}
+        <li class="py-12 mb-8 slide hide" data-slide="{{ add $i 1 }}">
+          <div
+            class="font-montserrat leading-12 grid landing-portfolio-card text-[#1e1e1e] text-[1.2rem] md:text-[1.3rem]"
+          >
+            <h2
+              class="font-semibold text-[20px] md:text-[2.5rem] tracking-wide m-0 portfolio-title text-center md:text-left mb-0 after:content-[''] after:block after:h-2 after:w-[15rem] after:my-4 after:bg-[#4951ff] after:mx-auto md:after:ml-0"
+            >
+              {{ $project.title }}
+            </h2>
+            <p
+              class="portfolio-text m-0 line-clamp-2 md:line-clamp-4 leading-[3rem] md:leading-[2.2rem] mb-3"
+            >
+              {{ $project.description }}
+            </p>
+            <div class="portfolio-action self-end md:pt-3 flex">
+              <a href="/portfolio/#{{ $project.title }}" class="portfolio-read-more">Read More</a>
+              <div class="ml-auto flex">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="rotate-180 cursor-pointer prev-slide-btn {{ if eq $i 0 }}hidden{{ end }}"
+                >
+                  <g>
+                    <path
+                      d="M10 17L15 12L10 7"
+                      stroke="#5337FF"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </g>
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="cursor-pointer next-slide-btn {{ if eq $i (sub (len $.Site.Data.projects) 1) }}hidden{{ end }}"
+                >
+                  <g>
+                    <path
+                      d="M10 17L15 12L10 7"
+                      stroke="#5337FF"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="portfolio-image overflow-hidden rounded-xl self-center">
+              <img
+                alt="{{ $project.title }}"
+                src="{{ $project.image }}"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,11 @@
+---
+title: "phx.tools: Complete Development Environment for Elixir and Phoenix"
+date: 2023-03-02
+author: "Almir Sarajčić"
+role: "Software Developer"
+reading_time: 3
+image: "/images/blog/phx_tools.png"
+draft: false
+---
+
+<div>Elixir is a powerful functional programming language that has been attracting the attention of developers from different backgrounds since its release. Many of its new users already have experience with tools such as Homebrew and asdf, which makes the installation process smoother. However, setting up the development environment for Phoenix applications can still be a challenge, especially for new developers.&nbsp;</div><div>&nbsp;</div><div>Past few years, the Elixir ecosystem has become more approachable to new developers. The learning curve is flattening every year with the introduction of tools like <a href="https://livebook.dev/">Livebook</a>. It's a great way to start with Elixir, as the installation is straightforward. What's still missing is a complete setup for the development of Phoenix apps.&nbsp;</div><div>&nbsp;</div><div>At Optimum BH, we've seen the potential of the Phoenix and Elixir stack, and have been working with it for some time now. Our team has had several interns who were new to both Elixir and programming, and we've noticed that the process of setting up the development environment can be demotivating for these newcomers.&nbsp;</div><div>&nbsp;</div><div>The Ruby on Rails community has <a href="https://rails.new/">rails.new</a>. It's a complete development environment containing everything you need to start a new Rails application. We believe that Phoenix and Elixir ecosystem can benefit from something similar.&nbsp;</div><div>&nbsp;</div><div>So, let me introduce you to phx.tools. It's a shell script for platforms Linux and macOS (sorry, Windows users) that configures the development environment for you in a few easy steps. Once you finish running the script, you'll be able to start the database server, create a new Phoenix application, and launch the server.&nbsp;</div><div>&nbsp;</div><div>To get started, visit <a href="https://phx.tools/">phx.tools</a> and follow the instructions for your platform. Happy coding!</div>

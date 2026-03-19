@@ -1,0 +1,15 @@
+{
+  "name": "optimum-landing",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npx @tailwindcss/cli -i ./assets/css/app.css -o ./static/css/app.css --minify && hugo",
+    "watch:css": "npx @tailwindcss/cli -i ./assets/css/app.css -o ./static/css/app.css --watch",
+    "serve": "npm run build && echo '\\nServer running at http://localhost:1313\\n' && concurrently \"npm run watch:css\" \"hugo server\""
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "concurrently": "^9.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

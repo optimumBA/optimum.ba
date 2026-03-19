@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Phx.tools",
+    "description": "Powerful shell script designed for Linux and macOS that simplifies the process of setting up a development environment for Phoenix applications using the Elixir programming language. It configures the environment in just a few easy steps, allowing users to start the database server, create a new Phoenix application, and launch the server seamlessly. The script is particularly useful for new developers who may find the setup process challenging. With Phoenix Tools, the Elixir ecosystem becomes more approachable and accessible, allowing developers to unlock the full potential of the Phoenix and Elixir stack.",
+    "short_description": "Shell script for Linux and macOS that sets up a complete Phoenix/Elixir development environment with a single command.",
+    "image": "/images/portfolio/phx_tools.png",
+    "url": "https://phx.tools"
+  },
+  {
+    "title": "Prati.ba",
+    "description": "Bosnian news aggregator website that collects and curates news articles from various sources, including local news outlets and international media. The website provides news on a variety of topics, including politics, sports, business, culture, and entertainment, among others.",
+    "short_description": "Bosnian news aggregator covering politics, sports, business, culture, and entertainment. Curating the best local content in one place.",
+    "image": "/images/portfolio/prati_ba.png",
+    "url": "https://prati.ba"
+  },
+  {
+    "title": "StoryDeck",
+    "description": "StoryDeck is a cloud-based video production tool that offers a range of features for content creators. It allows users to store and archive all their content in one location, track tasks and collaborate easily with team members, and use a multi-use text editor to manage multiple contributors. The platform also offers a timecode video review feature, allowing users to provide precise feedback on video files and a publishing tool with SEO optimization capabilities for traffic-driving content.",
+    "short_description": "Cloud-based video production tool with content storage, task tracking, multi-user editor, timecode review, and SEO-optimized publishing.",
+    "image": "/images/portfolio/story_deck.png",
+    "url": "https://storydeck.io"
+  }
+]

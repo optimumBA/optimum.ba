@@ -1,0 +1,67 @@
+{{ define "main" }}
+<div class="md-container">
+  <header class="flex items-center py-12">
+    <a href="/">
+      <svg
+        width="12"
+        height="20"
+        viewBox="0 0 12 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-3 md:w-4 lg:w-6"
+      >
+        <g clip-path="url(#clip0)">
+          <path
+            d="M10 18L2 10L10 2"
+            stroke="black"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </g>
+        <defs>
+          <clipPath id="clip0">
+            <rect width="12" height="20" fill="white"></rect>
+          </clipPath>
+        </defs>
+      </svg>
+    </a>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-wide mx-auto">
+      Recent Projects
+    </h2>
+  </header>
+
+  <section class="pt-4">
+    {{ range $i, $project := .Site.Data.projects }}
+    <div
+      class="font-montserrat leading-loose grid portfolio-card md:text-2xl md:leading-[2] py-20 first:pt-0 mb-2 border-b border-b-[#9887FF] last:border-b-0"
+      id="{{ $project.title }}"
+    >
+      <h2
+        class="font-semibold text-[2rem] md:text-[2.5rem] tracking-wide m-0 portfolio-title text-[#5337FF]"
+      >
+        {{ $project.title }}
+      </h2>
+
+      <p class="portfolio-text m-0">{{ $project.description }}</p>
+
+      <a
+        href="{{ $project.url }}"
+        target="_blank"
+        rel="noopener"
+        class="portfolio-action bg-[#5337FF] hover:opacity-80 focus:opacity-80 text-white text-[1.5rem] text-center w-[90%] sm:w-[40%] mx-auto px-3 py-2 md:py-5 md:px-1 rounded-xl mt-16"
+        >View Project</a
+      >
+
+      <div class="portfolio-image overflow-hidden md:h-[50rem] rounded-3xl">
+        <img
+          alt="{{ $project.title }}"
+          src="{{ $project.image }}"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+    {{ end }}
+  </section>
+</div>
+{{ end }}
