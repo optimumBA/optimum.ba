@@ -19,7 +19,8 @@ export async function articleImages(html) {
     const attributes = await imageAttributes(src, '(min-width: 1536px) 1044px, (min-width: 768px) 73vw, 100vw');
     const existingStyle = element.attr('style') || '';
     for (const [name, value] of Object.entries(attributes)) element.attr(name, String(value));
-    element.attr('style', `${attributes.style || ''} ${existingStyle}`.trim());
+    // Intrinsic ratios apply to the content box; article images include padding.
+    element.attr('style', `aspect-ratio: ${attributes.width} / ${attributes.height}; box-sizing: content-box; max-width: calc(100% - 1rem); ${existingStyle}`.trim());
     element.attr('loading', 'lazy').attr('decoding', 'async');
   }));
   return $.html();

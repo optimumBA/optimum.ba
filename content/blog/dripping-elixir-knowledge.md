@@ -15,12 +15,12 @@ In [his blog post](https://www.zachdaniel.dev/p/silos-in-the-elixir-community), 
 I'm talking about a website that's a hybrid between Twitter and a blog in that it can host shorter articles and code snippets that are quick to write and even quicker to read.
 
 <figure>
-<img src="/images/blog/dripping_elixir_knowledge-2.png" />
+<img src="/images/blog/dripping_elixir_knowledge-2.png" alt="Elixir Drops homepage listing short posts about CI/CD, installing the Elixir stack, AppSignal revisions, and development storage." />
 <figcaption class="attachment__caption attachment__caption--edited"><a href="https://elixirdrops.net">https://elixirdrops.net</a></figcaption>
 </figure>
 
 <figure>
-<img src="/images/blog/dripping_elixir_knowledge-3.png" />
+<img src="/images/blog/dripping_elixir_knowledge-3.png" alt="Elixir Drops article showing Linux and macOS commands to install Erlang, Elixir, PostgreSQL, and Phoenix." />
 <figcaption class="attachment__caption attachment__caption--edited"><a href="https://elixirdrops.net/d/VrY6GLZA">https://elixirdrops.net/d/VrY6GLZA</a></figcaption>
 </figure>
 
@@ -33,7 +33,7 @@ Still, there are some benefits to dropping some knowledge on our website:
 - sharing links on other websites looks great
 
 <figure>
-<img src="/images/blog/dripping_elixir_knowledge-4.png" />
+<img src="/images/blog/dripping_elixir_knowledge-4.png" alt="A phx.tools post on X with an Elixir Drops link preview showing the Linux and macOS installation commands." />
 <figcaption class="attachment__caption attachment__caption--edited"><a href="https://x.com/phx_tools/status/1854445026710843483">https://x.com/phx_tools/status/1854445026710843483</a></figcaption>
 </figure>
 

@@ -43,6 +43,20 @@ test('navigation, pagination, slideshow and article scroll tracking still work',
   await page.goto(`${origin}/blog/getting-started-with-ash-framework-in-elixir/`);
   await page.locator('#installing-ash-framework').evaluate(el => el.scrollIntoView());
   await page.waitForFunction(() => document.querySelector('.toc-active a')?.getAttribute('href') === '#installing-ash-framework');
+  await page.goto(`${origin}/blog/dripping-elixir-knowledge/`);
+  for (const width of [390, 1440]) {
+   await page.setViewportSize({width, height: 1000});
+   for (const image of await page.locator('.blog-post-body figure img').all()) {
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate(image => image.decode());
+    const dimensions = await image.evaluate(image => {
+     const style = getComputedStyle(image), rect = image.getBoundingClientRect();
+     return {alt: image.alt, width: rect.width - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight), height: rect.height - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom), ratio: Number(image.getAttribute('width')) / Number(image.getAttribute('height'))};
+    });
+    assert.ok(dimensions.alt.length > 20, 'article screenshots have descriptive alternatives');
+    assert.ok(Math.abs(dimensions.width / dimensions.height - dimensions.ratio) < 0.001, 'padded screenshot content retains its intrinsic ratio');
+   }
+  }
   assert.deepEqual(violations, []);
  } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }
 });
