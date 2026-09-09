@@ -1,5 +1,10 @@
 // Mobile menu toggle
 document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('[role="button"][tabindex="0"]').forEach(function (control) {
+    control.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") { event.preventDefault(); control.dispatchEvent(new MouseEvent("click", { bubbles: true })); }
+    });
+  });
   var btn = document.getElementById("mobile-menu-btn");
   var menu = document.getElementById("mobile-menu");
   var iconHamburger = document.getElementById("icon-hamburger");
@@ -8,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", function () {
       var opening = menu.classList.contains("hidden");
       menu.classList.toggle("hidden");
+      btn.setAttribute("aria-expanded", String(opening));
       if (iconHamburger) iconHamburger.classList.toggle("hidden", opening);
       if (iconClose) iconClose.classList.toggle("hidden", !opening);
     });
@@ -135,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         target.scrollIntoView({ behavior: "smooth" });
         var menu = document.getElementById("mobile-menu");
-        if (menu) menu.classList.add("hidden");
+        if (menu) { menu.classList.add("hidden"); if (btn) btn.setAttribute("aria-expanded", "false"); }
       }
     });
   });

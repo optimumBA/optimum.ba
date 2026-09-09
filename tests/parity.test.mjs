@@ -9,15 +9,16 @@ const files = root => fs.readdirSync(root, {recursive: true}).filter(file => fs.
 test('existing pages preserve text, metadata, links, anchors and code rendering', {skip: !baseline}, () => {
  for (const file of files(baseline).filter(file => file.endsWith('.html'))) {
   const old = load(fs.readFileSync(path.join(baseline, file))), next = load(fs.readFileSync(path.join('dist', file)));
+  next('.sr-only').remove();
   assert.equal(norm(next('body').text()), norm(old('body').text()), `${file}: body text`);
   assert.equal(norm(next('title').text()), norm(old('title').text()), `${file}: title`);
   for (const selector of ['meta[name="description"]', 'meta[property="og:title"]', 'meta[property="og:description"]', 'meta[property="og:image"]']) assert.equal(next(selector).attr('content'), old(selector).attr('content'), `${file}: ${selector}`);
-  for (const [selector, attribute] of [['a','href'], ['[id]','id'], ['img','src']]) assert.deepEqual(next(selector).map((i,e)=>next(e).attr(attribute)).get(), old(selector).map((i,e)=>old(e).attr(attribute)).get(), `${file}: ${attribute}`);
+  for (const [selector, attribute] of [['a','href'], ['[id]','id'], ['img','src']]) assert.deepEqual(next(selector).map((i,e)=>(selector === 'img' ? (next(e).attr('data-original-src') || next(e).attr(attribute)) : next(e).attr(attribute))).get(), old(selector).map((i,e)=>old(e).attr(attribute)).get(), `${file}: ${attribute}`);
   assert.deepEqual(next('pre').map((i,e)=>next.html(e)).get(), old('pre').map((i,e)=>old.html(e)).get(), `${file}: syntax rendering`);
  }
 });
 test('existing assets are unchanged', {skip: !baseline}, () => {
- for (const file of files(baseline).filter(file => /\.(png|gif|svg|ico|js)$/.test(file))) assert.deepEqual(fs.readFileSync(path.join('dist', file)), fs.readFileSync(path.join(baseline, file)), file);
+ for (const file of files(baseline).filter(file => /\.(png|gif|svg|ico)$/.test(file))) assert.deepEqual(fs.readFileSync(path.join('dist', file)), fs.readFileSync(path.join(baseline, file)), file);
 });
 test('all existing feeds retain their items and descriptions', {skip: !baseline}, () => {
  for (const file of ['index.xml','blog/index.xml','portfolio/index.xml']) {

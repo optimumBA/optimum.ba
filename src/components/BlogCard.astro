@@ -1,4 +1,5 @@
 ---
+import ResponsiveImage from './ResponsiveImage.astro';
 const {post} = Astro.props;
 ---
 <article class="blog-card post-article-card">
@@ -8,9 +9,10 @@ const {post} = Astro.props;
       <div
         class="rounded-tl-2xl rounded-tr-2xl overflow-hidden image-container h-[227px]"
       >
-        <img
+        <ResponsiveImage
           alt="Post Image"
           src={post.image}
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           class="w-full h-full object-cover object-center"
         />
       </div>

@@ -1,13 +1,17 @@
 ---
+import {imageAttributes, articleImages} from '../../lib/images.js';
 import Base from '../../layouts/Base.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import {posts} from '../../lib/content.js';
 export function getStaticPaths() { return posts.map(post => ({params: {slug: post.slug}, props: {post}})); }
 const {post} = Astro.props;
+const hero = post.image ? await imageAttributes(post.image) : null;
+const article = await articleImages(post.html);
 // Hugo compares explicit Slug values; these posts have no explicit slug.
 const related = posts.filter(item => item.explicitSlug !== post.explicitSlug).slice(0, 3);
 ---
 <Base title={post.title} image={post.image} description={post.description}>
+  {hero && <link slot="head" rel="preload" as="image" href={hero.src} fetchpriority="high" />}
 
 <article>
   <section
@@ -16,7 +20,7 @@ const related = posts.filter(item => item.explicitSlug !== post.explicitSlug).sl
     <!-- Hero -->
     <div
       class="text-white text-lg h-[30vh] md:h-[35vh] blog-hero bg-cover bg-no-repeat"
-      style={post.image ? `background-image: linear-gradient(rgba(103, 58, 183, 0.5), rgba(103, 58, 183, 0.5)), url('${post.image}'); background-position: center 20%;` : undefined}
+      style={post.image ? `background-image: linear-gradient(rgba(103, 58, 183, 0.5), rgba(103, 58, 183, 0.5)), url('${hero.src}'); background-position: center 20%;` : undefined}
     >
       <div class="header-content grid content-end gap-y-2 pb-8">
         <h1 class="text-[2.75rem] font-bold">{post.title}</h1>
@@ -75,7 +79,7 @@ const related = posts.filter(item => item.explicitSlug !== post.explicitSlug).sl
 
     <!-- Content + TOC -->
     <div class="py-14 blog-post-grid">
-      <div class="blog-post-body"><span id="introduction"></span><Fragment set:html={post.html} /></div>
+      <div class="blog-post-body"><span id="introduction"></span><Fragment set:html={article} /></div>
 
       <div class="hidden md:block py-5 px-6 border rounded-[1rem] shadow-lg shadow-[#b5ace3] table-of-contents">
         <h2 class="font-normal text-[2rem] leading-normal text-[#1D1D1D] mb-[2.375rem]">Contents</h2>

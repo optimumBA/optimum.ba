@@ -1,4 +1,5 @@
 ---
+import '../../static/css/app.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 const {home = false, title = '', image, description = 'Full-stack software development agency specializing in the PETAL stack — Phoenix, Elixir, TailwindCSS, Alpine.js, LiveView.'} = Astro.props;
@@ -21,22 +22,12 @@ const analytics = import.meta.env.PROD && (!process.env.CF_PAGES_BRANCH || proce
     <meta property="og:description" content={description} />
     {!home && <meta property="og:title" content={title} />}
     {image && <meta property="og:image" content={image} />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/fonts/montserrat-6438d7b8ea9c.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="/images/favicon-180x180.png" />
-    <link rel="stylesheet" href="/css/app.css" />
-    
+    <slot name="head" />
   </head>
 
   <body class="font-montserrat">

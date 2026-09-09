@@ -1,0 +1,6 @@
+---
+import {imageAttributes} from '../lib/images.js';
+const {src, sizes = '100vw', loading = 'lazy', ...attributes} = Astro.props;
+const optimized = await imageAttributes(src, sizes);
+---
+<img {...optimized} {...attributes} loading={loading} decoding="async" fetchpriority={loading === "eager" ? "high" : "low"} />

@@ -1,4 +1,5 @@
 ---
+import ResponsiveImage from '../components/ResponsiveImage.astro';
 import {portfolioPage} from '../lib/content.js';
 import Base from '../layouts/Base.astro';
 import projects from '../../data/projects.json';
@@ -7,7 +8,7 @@ import projects from '../../data/projects.json';
 
 <div class="md-container">
   <header class="flex items-center py-12">
-    <a href="/">
+    <a href="/" aria-label="Back to Optimum home">
       <svg
         width="12"
         height="20"
@@ -60,9 +61,10 @@ import projects from '../../data/projects.json';
       >
 
       <div class="portfolio-image overflow-hidden md:h-[50rem] rounded-3xl">
-        <img
+        <ResponsiveImage
           alt={project.title}
           src={project.image}
+          sizes="(min-width: 768px) 900px, 100vw"
           class="w-full h-full object-cover"
         />
       </div>
