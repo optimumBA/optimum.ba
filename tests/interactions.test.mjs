@@ -11,6 +11,7 @@ test('navigation, pagination, slideshow and article scroll tracking still work',
   if (pathname.endsWith('/')) pathname += 'index.html';
   const file = path.join('dist', pathname);
   try {
+   for (const line of fs.readFileSync('dist/_headers', 'utf8').split('\n\n')[0].split('\n').slice(1)) {const colon = line.indexOf(':');if(colon > 0) response.setHeader(line.slice(0,colon).trim(),line.slice(colon+1).trim());}
    response.setHeader('Content-Type', ({'.html':'text/html', '.css':'text/css', '.js':'application/javascript', '.png':'image/png', '.svg':'image/svg+xml', '.gif':'image/gif'})[path.extname(file)] || 'application/octet-stream');
    response.end(fs.readFileSync(file));
   } catch { response.statusCode = 404; response.end(); }
@@ -19,6 +20,8 @@ test('navigation, pagination, slideshow and article scroll tracking still work',
  const browser = await chromium.launch({headless: true});
  try {
   const page = await browser.newPage({viewport: {width: 390, height: 844}});
+  const violations = [];
+  page.on('console', message => {if (message.text().includes('Content Security Policy')) violations.push(message.text());});
   const origin = `http://127.0.0.1:${server.address().port}`;
   await page.goto(origin);
   assert.equal(await page.locator('#mobile-menu').isVisible(), false);
@@ -37,5 +40,6 @@ test('navigation, pagination, slideshow and article scroll tracking still work',
   await page.goto(`${origin}/blog/getting-started-with-ash-framework-in-elixir/`);
   await page.locator('#installing-ash-framework').evaluate(el => el.scrollIntoView());
   await page.waitForFunction(() => document.querySelector('.toc-active a')?.getAttribute('href') === '#installing-ash-framework');
+  assert.deepEqual(violations, []);
  } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }
 });
