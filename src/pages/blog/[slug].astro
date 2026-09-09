@@ -7,7 +7,7 @@ const {post} = Astro.props;
 const hero = post.image ? await imageAttributes(post.image, '(min-width: 1000px) 900px, 100vw') : null;
 const article = await articleImages(post.html);
 ---
-<Base title={post.title} image={post.image} description={post.description}>
+<Base title={post.title} image={post.image} description={post.description || post.searchDescription}>
 <article class="wrap article"><header class="article-heading"><a class="text-link" href="/blog/">← All articles</a><p class="eyebrow">From the Optimum BH archive</p><h1>{post.title}</h1><div class="article-meta"><span>{post.author}{post.role && ` · ${post.role}`}</span><span><time datetime={post.date.toISOString()}>{post.cardDate}</time> · {post.reading_time} min read</span></div></header>
 {hero && <img class="article-hero" {...hero} alt={post.title} fetchpriority="high" />}
 <div class="reading-grid"><div class="blog-post-body"><span id="introduction"></span><Fragment set:html={article} /></div><aside><details open><summary>In this article</summary><ul class="toc-list"><li><a href="#introduction">Introduction</a></li><Fragment set:html={post.toc} /></ul></details></aside></div>

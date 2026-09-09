@@ -18,3 +18,23 @@ test('sitemap contains exactly the canonical HTML routes, excluding errors and f
  assert.match(headers,/https:\/\/:project.pages.dev\/\*\n  X-Robots-Tag: noindex/);
  assert.match(headers,/https:\/\/:version.:project.pages.dev\/\*\n  X-Robots-Tag: noindex/);
 });
+test('sharing metadata and article descriptions describe canonical pages', () => {
+ const pages=fs.readdirSync('dist',{recursive:true}).filter(f=>f.endsWith('.html')&&f!=='404.html');
+ for(const file of pages){
+  const $=load(fs.readFileSync('dist/'+file));
+  const image=$('meta[property="og:image"]').attr('content');
+  assert.ok(image.startsWith('https://optimum.ba/'));
+  assert.ok(fs.existsSync('dist'+new URL(image).pathname));
+  assert.equal($('meta[name="twitter:image"]').attr('content'),image);
+  assert.equal($('meta[name="twitter:card"]').attr('content'),'summary_large_image');
+  assert.equal($('meta[property="og:url"]').attr('content'),$('link[rel=canonical]').attr('href'));
+  if($('.blog-post-body').length){
+   const description=$('meta[name=description]').attr('content');
+   const prose=$('.blog-post-body p, .blog-post-body div').filter((i,p)=>!$(p).find('p, div, h1, h2, h3, pre, ul, ol').length).map((i,p)=>$(p).text()).get().join(' ').replace(/\s+/g,' ').trim();
+   assert.ok(description.length>0 && description.length<=160);
+   assert.ok(prose.startsWith(description.replace(/…$/,'')));
+   assert.equal($('meta[property="og:type"]').attr('content'),'article');
+  }else assert.equal(image,'https://optimum.ba/brand/optimum-social-preview.png');
+ }
+ assert.equal(load(fs.readFileSync('dist/sitemap.xml'),{xml:true})('lastmod').length,0,'omit dates without a maintained modification source');
+});

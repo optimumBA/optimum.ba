@@ -36,7 +36,10 @@ export const posts=fs.readdirSync('content/blog').filter(n=>n.endsWith('.md')).m
  const slug=data.slug||name.slice(0,-3),html=markdown.render(content,{}),date=new Date(data.date),day=date.getUTCDate();
  const month=date.toLocaleString('en-US',{month:'long',timeZone:'UTC'}),suffix=[1,21,31].includes(day)?'st':[2,22].includes(day)?'nd':[3,23].includes(day)?'rd':'th';
  const summaryHTML=summary(html);
- return {...data,date,slug,explicitSlug:data.slug||'',url:`https://optimum.ba/blog/${slug}/`,html,toc:toc(html),summaryHTML,summary:load(summaryHTML.replace(/<br\s*\/?>/gi,' ')).text().replace(/\n/g,' ').trim(),cardDate:`${month} ${day}${suffix}, ${date.getUTCFullYear()}`,articleDate:`${month} ${day}nd, ${date.getUTCFullYear()}`};
+ const document = load(html);
+ const prose = document('p, div').filter((i, node) => !document(node).find('p, div, h1, h2, h3, pre, ul, ol').length).map((i, node) => document(node).text()).get().join(' ').replace(/\s+/g, ' ').trim();
+ const searchDescription = prose.length > 160 ? prose.slice(0, 157).replace(/\s+\S*$/, '') + '…' : prose;
+ return {...data,searchDescription,date,slug,explicitSlug:data.slug||'',url:`https://optimum.ba/blog/${slug}/`,html,toc:toc(html),summaryHTML,summary:load(summaryHTML.replace(/<br\s*\/?>/gi,' ')).text().replace(/\n/g,' ').trim(),cardDate:`${month} ${day}${suffix}, ${date.getUTCFullYear()}`,articleDate:`${month} ${day}nd, ${date.getUTCFullYear()}`};
 }).filter(p=>!p.draft).sort((a,b)=>b.date-a.date||a.title.localeCompare(b.title));
 export const routes=['/','/blog/',...posts.map(p=>`/blog/${p.slug}/`)];
 
