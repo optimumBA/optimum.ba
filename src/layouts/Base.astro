@@ -9,6 +9,10 @@ const analytics = import.meta.env.PROD && (!process.env.CF_PAGES_BRANCH || proce
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    {home && <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'WebSite', name: 'Optimum', url: 'https://optimum.ba/'
+    })} />}
     <title>{home ? "Optimum" : `${title} — Optimum`}</title>
     <meta
       name="description"
