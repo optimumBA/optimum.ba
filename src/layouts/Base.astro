@@ -2,6 +2,7 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 const {home = false, title = '', image, description = 'Full-stack software development agency specializing in the PETAL stack — Phoenix, Elixir, TailwindCSS, Alpine.js, LiveView.'} = Astro.props;
+const analytics = import.meta.env.PROD && (!process.env.CF_PAGES_BRANCH || process.env.CF_PAGES_BRANCH === 'main');
 ---
 <!doctype html>
 <html lang="en">
@@ -39,5 +40,6 @@ const {home = false, title = '', image, description = 'Full-stack software devel
     <main><slot /></main>
     <Footer />
     <script is:inline src="/js/app.js"></script>
+    {analytics && <script is:inline defer src="/js/analytics.js"></script>}
   </body>
 </html>
