@@ -1,4 +1,10 @@
-{{ define "main" }}
+---
+import {portfolioPage} from '../lib/content.js';
+import Base from '../layouts/Base.astro';
+import projects from '../../data/projects.json';
+---
+<Base title={portfolioPage.title} description={portfolioPage.description}>
+
 <div class="md-container">
   <header class="flex items-center py-12">
     <a href="/">
@@ -32,21 +38,21 @@
   </header>
 
   <section class="pt-4">
-    {{ range $i, $project := .Site.Data.projects }}
+    {projects.map(project => (
     <div
       class="font-montserrat leading-loose grid portfolio-card md:text-2xl md:leading-[2] py-20 first:pt-0 mb-2 border-b border-b-[#9887FF] last:border-b-0"
-      id="{{ $project.title }}"
+      id={project.title}
     >
       <h2
         class="font-semibold text-[2rem] md:text-[2.5rem] tracking-wide m-0 portfolio-title text-[#5337FF]"
       >
-        {{ $project.title }}
+        {project.title}
       </h2>
 
-      <p class="portfolio-text m-0">{{ $project.description }}</p>
+      <p class="portfolio-text m-0">{project.description}</p>
 
       <a
-        href="{{ $project.url }}"
+        href={project.url}
         target="_blank"
         rel="noopener"
         class="portfolio-action bg-[#5337FF] hover:opacity-80 focus:opacity-80 text-white text-[1.5rem] text-center w-[90%] sm:w-[40%] mx-auto px-3 py-2 md:py-5 md:px-1 rounded-xl mt-16"
@@ -55,13 +61,14 @@
 
       <div class="portfolio-image overflow-hidden md:h-[50rem] rounded-3xl">
         <img
-          alt="{{ $project.title }}"
-          src="{{ $project.image }}"
+          alt={project.title}
+          src={project.image}
           class="w-full h-full object-cover"
         />
       </div>
     </div>
-    {{ end }}
+    ))}
   </section>
 </div>
-{{ end }}
+
+</Base>

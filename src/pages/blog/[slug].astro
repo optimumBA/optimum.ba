@@ -1,4 +1,14 @@
-{{ define "main" }}
+---
+import Base from '../../layouts/Base.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import {posts} from '../../lib/content.js';
+export function getStaticPaths() { return posts.map(post => ({params: {slug: post.slug}, props: {post}})); }
+const {post} = Astro.props;
+// Hugo compares explicit Slug values; these posts have no explicit slug.
+const related = posts.filter(item => item.explicitSlug !== post.explicitSlug).slice(0, 3);
+---
+<Base title={post.title} image={post.image} description={post.description}>
+
 <article>
   <section
     class="overlay-backdrop text-[1.65rem] leading-[1.75] md:leading-[2] content-grid"
@@ -6,19 +16,13 @@
     <!-- Hero -->
     <div
       class="text-white text-lg h-[30vh] md:h-[35vh] blog-hero bg-cover bg-no-repeat"
-      {{
-      with
-      .Params.image
-      }}style="background-image: linear-gradient(rgba(103, 58, 183, 0.5), rgba(103, 58, 183, 0.5)), url('{{ . }}'); background-position: center 20%;"
-      {{
-      end
-      }}
+      style={post.image ? `background-image: linear-gradient(rgba(103, 58, 183, 0.5), rgba(103, 58, 183, 0.5)), url('${post.image}'); background-position: center 20%;` : undefined}
     >
       <div class="header-content grid content-end gap-y-2 pb-8">
-        <h1 class="text-[2.75rem] font-bold">{{ .Title }}</h1>
+        <h1 class="text-[2.75rem] font-bold">{post.title}</h1>
 
         <p class="md:text-xl order-last m-0 self-start">
-          <span class="md:font-bold">By {{ .Params.author }},</span><span class="md:hidden">&#32;</span><br class="hidden md:block" /><span>{{ .Params.role }}</span>
+          <span class="md:font-bold">By {post.author},</span><span class="md:hidden">&#32;</span><br class="hidden md:block" /><span>{post.role}</span>
         </p>
 
         <div class="mb-2 flex gap-x-4 order-first self-end">
@@ -45,7 +49,7 @@
                 stroke-linejoin="round"
               ></path>
             </svg>
-            <span>{{ .Params.reading_time }} min read</span>
+            <span>{post.reading_time} min read</span>
           </p>
           <p class="flex gap-x-2 items-center">
             <svg
@@ -61,7 +65,7 @@
               ></path>
             </svg>
             <time class="text-[12px] self-center"
-              >{{ .Date.Format "January 2nd, 2006" }}</time
+              >{post.articleDate}</time
             >
           </p>
         </div>
@@ -71,12 +75,11 @@
 
     <!-- Content + TOC -->
     <div class="py-14 blog-post-grid">
-      <div class="blog-post-body"><span id="introduction"></span>{{ .Content }}</div>
+      <div class="blog-post-body"><span id="introduction"></span><Fragment set:html={post.html} /></div>
 
       <div class="hidden md:block py-5 px-6 border rounded-[1rem] shadow-lg shadow-[#b5ace3] table-of-contents">
-        {{- $toc := .TableOfContents -}}{{- $hasToc := gt (len (findRE "<li>" $toc)) 0 -}}
         <h2 class="font-normal text-[2rem] leading-normal text-[#1D1D1D] mb-[2.375rem]">Contents</h2>
-        <ul class="toc-list"><li><a href="#introduction">Introduction</a></li>{{- if $hasToc }}{{- $inner := $toc | replaceRE `(?s)^.*?<ul>` "" | replaceRE `</ul>.*$` "" -}}{{ $inner | safeHTML }}{{- end }}</ul>
+        <ul class="toc-list"><li><a href="#introduction">Introduction</a></li><Fragment set:html={post.toc} /></ul>
         <hr class="mt-[3.5rem] border-2 border-[#5337ff] opacity-30" />
         <p class="-mt-3 font-normal leading-[2em]">Contact us at</p>
         <div class="mt-3">
@@ -87,9 +90,7 @@
   </section>
 
   <!-- More articles -->
-  {{ $currentSlug := .Slug }} {{ $others := where .Site.RegularPages "Type"
-  "blog" }} {{ $related := first 3 (where $others "Slug" "ne" $currentSlug) }}
-  {{ if $related }}
+  {related.length > 0 && (
   <div class="content-grid pb-16">
     <h3
       class="font-semibold tracking-wide text-[2.275rem] before:content-[''] before:opacity-75 before:my-16 before:block before:h-[0.125rem] before:bg-[#5337ff] before:w-full"
@@ -97,9 +98,10 @@
       More articles
     </h3>
     <div class="more-articles">
-      {{ range $related }}{{ partial "blog-card.html" . }}{{ end }}
+      {related.map(item => <BlogCard post={item} />)}
     </div>
   </div>
-  {{ end }}
+  )}
 </article>
-{{ end }}
+
+</Base>

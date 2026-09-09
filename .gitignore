@@ -6,3 +6,5 @@
 static/css/app.css
 AGENTS.md
 CLAUDE.md
+/dist/
+/.astro/

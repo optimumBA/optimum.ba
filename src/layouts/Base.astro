@@ -1,22 +1,21 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+const {home = false, title = '', image, description = 'Full-stack software development agency specializing in the PETAL stack — Phoenix, Elixir, TailwindCSS, Alpine.js, LiveView.'} = Astro.props;
+---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title
-      }}{{ end }}
-    </title>
+    <title>{home ? "Optimum" : `${title} — Optimum`}</title>
     <meta
       name="description"
-      content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"
+      content={description}
     />
-    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
-    {{ if not .IsHome }}
-    <meta property="og:title" content="{{ .Title }}" />
-    {{ end }} {{ with .Params.image }}
-    <meta property="og:image" content="{{ . }}" />
-    {{ end }}
+    <meta property="og:description" content={description} />
+    {!home && <meta property="og:title" content={title} />}
+    {image && <meta property="og:image" content={image} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -32,13 +31,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="/images/favicon-180x180.png" />
     <link rel="stylesheet" href="/css/app.css" />
-    {{ block "head" . }}{{ end }}
+    
   </head>
 
   <body class="font-montserrat">
-    {{ partial "nav.html" . }}
-    <main>{{ block "main" . }}{{ end }}</main>
-    {{ partial "footer.html" . }}
-    <script src="/js/app.js"></script>
+    <Nav />
+    <main><slot /></main>
+    <Footer />
+    <script is:inline src="/js/app.js"></script>
   </body>
 </html>
