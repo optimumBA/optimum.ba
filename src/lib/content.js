@@ -38,7 +38,7 @@ export const posts=fs.readdirSync('content/blog').filter(n=>n.endsWith('.md')).m
  const summaryHTML=summary(html);
  return {...data,date,slug,explicitSlug:data.slug||'',url:`https://optimum.ba/blog/${slug}/`,html,toc:toc(html),summaryHTML,summary:load(summaryHTML.replace(/<br\s*\/?>/gi,' ')).text().replace(/\n/g,' ').trim(),cardDate:`${month} ${day}${suffix}, ${date.getUTCFullYear()}`,articleDate:`${month} ${day}nd, ${date.getUTCFullYear()}`};
 }).filter(p=>!p.draft).sort((a,b)=>b.date-a.date||a.title.localeCompare(b.title));
-export const routes=['/','/portfolio/',...posts.map(p=>`/blog/${p.slug}/`)];
+export const routes=['/','/blog/',...posts.map(p=>`/blog/${p.slug}/`)];
 
 export const homePage = matter(fs.readFileSync('content/_index.md', 'utf8')).data;
 export const portfolioPage = matter(fs.readFileSync('content/portfolio/_index.md', 'utf8')).data;

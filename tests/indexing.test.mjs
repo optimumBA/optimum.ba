@@ -13,7 +13,7 @@ test('sitemap contains exactly the canonical HTML routes, excluding errors and f
  assert.match(fs.readFileSync('dist/robots.txt','utf8'), /Sitemap: https:\/\/optimum.ba\/sitemap.xml/);
  assert.match(fs.readFileSync('dist/robots.txt','utf8'), /User-agent: OAI-SearchBot\nAllow: \//);
  const $=load(fs.readFileSync('dist/index.html'));
- assert.deepEqual(JSON.parse($('script[type="application/ld+json"]').text()),{'@context':'https://schema.org','@type':'WebSite',name:'Optimum',url:'https://optimum.ba/'});
+ assert.deepEqual(JSON.parse($('script[type="application/ld+json"]').text()),{'@context':'https://schema.org','@type':'WebSite',name:'Optimum Tech',url:'https://optimum.ba/'});
  const headers=fs.readFileSync('dist/_headers','utf8');
  assert.match(headers,/https:\/\/:project.pages.dev\/\*\n  X-Robots-Tag: noindex/);
  assert.match(headers,/https:\/\/:version.:project.pages.dev\/\*\n  X-Robots-Tag: noindex/);

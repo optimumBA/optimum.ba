@@ -5,7 +5,7 @@ import path from 'node:path';
 import http from 'node:http';
 import {chromium} from '@playwright/test';
 
-test('navigation, pagination, slideshow and article scroll tracking still work', async () => {
+test('archive navigation, article anchors and responsive images work', async () => {
  const server = http.createServer((request, response) => {
   let pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
   if (pathname.endsWith('/')) pathname += 'index.html';
@@ -24,25 +24,13 @@ test('navigation, pagination, slideshow and article scroll tracking still work',
   page.on('console', message => {if (message.text().includes('Content Security Policy')) violations.push(message.text());});
   const origin = `http://127.0.0.1:${server.address().port}`;
   await page.goto(origin);
-  assert.equal(await page.locator('#mobile-menu').isVisible(), false);
-  await page.locator('#mobile-menu-btn').click();
-  assert.equal(await page.locator('#mobile-menu').isVisible(), true);
-  assert.equal(await page.locator('#mobile-menu-btn').getAttribute('aria-expanded'), 'true');
-  await page.locator('#mobile-menu-btn').click();
-  assert.equal(await page.locator('#mobile-menu').isVisible(), false);
-  await page.getByRole('button', {name: 'Blog page 2', exact: true}).focus();
-  await page.keyboard.press('Enter');
-  assert.equal(await page.locator('[data-blog-page="1"]:visible').count(), 0);
-  assert.equal(await page.locator('[data-blog-page="2"]:visible').count(), 6);
-  await page.locator('#pagination-controls [data-page="3"]').click();
-  assert.equal(await page.locator('[data-blog-page="3"]:visible').count(), 3);
-  await page.locator('.slide.show .next-slide-btn').focus();
-  await page.keyboard.press('Enter');
-  assert.equal(await page.locator('.slide.show').getAttribute('data-slide'), '2');
-  await page.setViewportSize({width: 1440, height: 1000});
+  await page.getByRole('link', {name: 'Blog', exact: true}).click();
+  assert.equal(await page.locator('.article-row').count(),15);
+  await page.locator('.article-row').first().click();
+  assert.ok(await page.locator('.blog-post-body').isVisible());
   await page.goto(`${origin}/blog/getting-started-with-ash-framework-in-elixir/`);
-  await page.locator('#installing-ash-framework').evaluate(el => el.scrollIntoView());
-  await page.waitForFunction(() => document.querySelector('.toc-active a')?.getAttribute('href') === '#installing-ash-framework');
+  await page.locator('.toc-list a[href="#installing-ash-framework"]').click();
+  assert.ok(page.url().endsWith('#installing-ash-framework'));
   await page.goto(`${origin}/blog/dripping-elixir-knowledge/`);
   for (const width of [390, 1440]) {
    await page.setViewportSize({width, height: 1000});

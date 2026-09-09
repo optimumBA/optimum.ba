@@ -21,9 +21,8 @@ test('responsive variants preserve original image ownership and use cacheable bu
   assert.equal($('link[rel="stylesheet"][href^="/_astro/"]').length,1);
  }
  const home=load(fs.readFileSync('dist/index.html'));
- const hero=home('img[data-original-src="/images/services-illustration.png"]');
- assert.equal(hero.attr('loading'),'eager');assert.equal(hero.attr('fetchpriority'),'high');
- assert.equal(home('.blog-card img[loading="lazy"]').length,15);
+ assert.equal(home('img[src="/brand/optimum-symbol-cobalt.svg"]').length,1);
+ assert.equal(home('.article-row').length,3);
  for(const file of fs.readdirSync('static/fonts').filter(file=>file.endsWith('.woff2'))){assert.equal(fs.readFileSync('static/fonts/'+file).subarray(0,4).toString(),'wOF2');assert.match(file,/-[0-9a-f]{12}\.woff2$/);}
  for(const family of ['montserrat','jetbrains-mono'])assert.match(fs.readFileSync(`static/fonts/${family}-OFL.txt`,'utf8'),/SIL OPEN FONT LICENSE/);
 });
