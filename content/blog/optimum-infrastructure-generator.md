@@ -8,6 +8,10 @@ image: "/images/blog/optimum_infrastructure_generator.png"
 draft: false
 ---
 
+> **Update, September 2026:** OptimumGenInfra is no longer maintained or sold.
+> Its source code is preserved as a [public archive on GitHub](https://github.com/optimumBA/optimum_gen_infra).
+> The article below remains unchanged as a record of the original product.
+
 In the [Elixir DevOps blog post series](/blog/elixir-devops-series) we wrote about our development workflows and the infrastructure facilitating them. Those are the tools we reach for on most of the projects. Fly.io is our platform of choice, but even when we're not the ones making that decision, we at least set up the continuous integration the way we described in the [Optimum Elixir CI with GitHub Actions](/blog/optimum-elixir-ci-with-github-actions).
 
 There are many moving pieces involved in the infrastructure setup, which can incur a great cost in terms of developer hours, even if following along our blog post series. As a small business owner, development team lead, or anyone involved in decision-making, you'll have a tough time justifying money spent on developers reinventing the wheel which is a CI/CD pipeline and other aspects of infrastructure setup versus taking an off-the-shelf solution.
