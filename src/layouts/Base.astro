@@ -10,7 +10,7 @@ const analytics = import.meta.env.PROD && (!process.env.CF_PAGES_BRANCH || proce
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>{home ? 'Optimum Tech — Software development and product consulting' : `${title} — Optimum Tech`}</title>
+<title>{home ? 'Optimum Tech | Software development and product consulting' : `${title} — Optimum Tech`}</title>
 <meta name="description" content={description} /><meta property="og:title" content={home ? 'Optimum Tech' : title} /><meta property="og:description" content={description} />
 <meta property="og:image" content={shareImage} />
 <meta property="og:url" content={canonical} /><meta property="og:type" content={Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname !== '/blog/' ? 'article' : 'website'} /><meta property="og:site_name" content="Optimum Tech" />
@@ -23,8 +23,8 @@ const analytics = import.meta.env.PROD && (!process.env.CF_PAGES_BRANCH || proce
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header wrap"><a class="logo" href="/" aria-label="Optimum Tech home"><img src="/brand/optimum-logo-cobalt.svg" width="240" height="60" alt="Optimum Tech" /></a><nav aria-label="Main navigation"><a href="/#work">Our work</a><a href="/blog/">Blog</a><a href="mailto:almir@optimum.ba">Get in touch <span aria-hidden="true">↗</span></a></nav></header>
+<header class="site-header wrap"><a class="logo" href="/" aria-label="Optimum Tech home"><img src="/brand/optimum-logo-cobalt.svg" width="240" height="60" alt="Optimum Tech" /></a><nav aria-label="Main navigation"><a href="/#work">Our work</a><a href="/blog/">Blog</a><a href="mailto:consulting@optimum.ba">Get in touch <span aria-hidden="true">↗</span></a></nav></header>
 <main id="main"><slot /></main>
-<footer class="wrap site-footer"><a href="/" class="footer-name">Optimum Tech</a><span>© {new Date().getFullYear()} Optimum Tech, LLC</span><div><a href="https://github.com/optimumBA">GitHub</a><a href="https://x.com/optimumBA">X</a><a href="/blog/index.xml">RSS</a></div></footer>
+<footer class="wrap site-footer"><a href="/" class="footer-name">Optimum Tech</a><span>© {new Date().getFullYear()} Optimum Tech, LLC</span><div><a href="https://github.com/optimumBA">GitHub</a><a href="https://x.com/optimumBA">X</a><a href="https://www.linkedin.com/company/optimum-tech-llc/">LinkedIn</a><a href="/blog/index.xml">RSS</a></div></footer>
 {analytics && <script is:inline defer src="/js/analytics.js"></script>}
 </body></html>
