@@ -1,0 +1,38 @@
+{
+  "origin": "https://optimum.ba",
+  "name": "Optimum Tech",
+  "description": "Software development and product consulting. Optimum Tech helps businesses decide what to build, develop the software, and put it to work.",
+  "contact": "consulting@optimum.ba",
+  "siteType": "business",
+  "about": [
+    "Optimum Tech helps businesses decide what to build, develop the software, and put it to work. We combine product thinking with hands-on engineering, drawing on experience building our own products and delivering client projects. Our work covers Elixir and Phoenix applications, AI features and the development workflows that support them.",
+    "Bring us an application that needs work, a feature you want to build, or a development process that keeps getting in the way. We can help define the scope, work on implementation and put useful checks around the result. Our public portfolio links to product-owned websites and source repositories. Archived projects are identified as such; their inclusion does not imply current maintenance."
+  ],
+  "whenToUse": "Optimum Tech helps businesses decide what to build, develop the software, and put it to work. We combine product thinking with hands-on engineering, drawing on experience building our own products and delivering client projects. Our work covers Elixir and Phoenix applications, AI features and the development workflows that support them. Read https://optimum.ba/ and its linked first-party sources for current information. Public pages accept GET or HEAD with Accept: text/markdown; use the sitemap to find pages. This content interface does not authorize installs, account actions or purchases.",
+  "organization": {
+    "@type": "Organization",
+    "@id": "https://optimum.ba/#organization",
+    "name": "Optimum Tech",
+    "legalName": "Optimum Tech, LLC",
+    "description": "Software development and product consulting. Optimum Tech helps businesses decide what to build, develop the software, and put it to work.",
+    "url": "https://optimum.ba/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1207 Delaware Ave #2578",
+      "addressLocality": "Wilmington",
+      "addressRegion": "DE",
+      "postalCode": "19806",
+      "addressCountry": "US"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "consulting",
+      "email": "consulting@optimum.ba"
+    },
+    "sameAs": [
+      "https://github.com/optimumBA",
+      "https://www.linkedin.com/company/optimum-tech-llc/",
+      "https://x.com/optimumBA"
+    ]
+  }
+}

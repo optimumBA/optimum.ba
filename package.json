@@ -2,7 +2,7 @@
   "name": "optimum-landing",
   "private": true,
   "scripts": {
-    "build": "npm run setup:syntax && npm run build:css && astro build",
+    "build": "npm run setup:syntax && npm run build:css && astro build && python3 scripts/build-agent-content.py",
     "build:css": "tailwindcss -i ./assets/css/app.css -o ./static/css/app.css --minify",
     "dev": "npm run setup:syntax && concurrently \"npm run watch:css\" \"astro dev\"",
     "serve": "npm run dev",

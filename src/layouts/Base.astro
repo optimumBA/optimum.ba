@@ -1,10 +1,12 @@
 ---
+import SiteInformationLinks from "../components/SiteInformationLinks.astro";
+import AgentMetadata from '../components/AgentMetadata.astro';
 import '../styles/brand.css';
-const {home = false, title = '', image, description = 'Software development and product consulting. Optimum Tech helps businesses decide what to build, develop the software, and put it to work.'} = Astro.props;
+const {home = false, title = '', image, description = 'Software development and product consulting. Optimum Tech helps businesses decide what to build, develop the software, and put it to work.', analyticsEnabled = true} = Astro.props;
 const shareImage = new URL(image || '/brand/optimum-social-preview.png', Astro.site).href;
 const pageTitle = home ? 'Optimum Tech' : title;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const analytics = import.meta.env.PROD && (!process.env.CF_PAGES_BRANCH || process.env.CF_PAGES_BRANCH === 'main');
+const analytics = analyticsEnabled && import.meta.env.PROD && (!process.env.CF_PAGES_BRANCH || process.env.CF_PAGES_BRANCH === 'main');
 ---
 <!doctype html>
 <html lang="en">
@@ -16,15 +18,15 @@ const analytics = import.meta.env.PROD && (!process.env.CF_PAGES_BRANCH || proce
 <meta property="og:url" content={canonical} /><meta property="og:type" content={Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname !== '/blog/' ? 'article' : 'website'} /><meta property="og:site_name" content="Optimum Tech" />
 {!image && <><meta property="og:image:width" content="1280" /><meta property="og:image:height" content="640" /><meta property="og:image:type" content="image/png" /><meta property="og:image:alt" content="Optimum Tech — Software development and product consulting" /></>}
 <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={pageTitle} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={shareImage} />
-{home && <script is:inline type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'WebSite',name:'Optimum Tech',url:'https://optimum.ba/'})} />}
+
 <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" /><link rel="icon" href="/favicon.ico" sizes="any" /><link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="alternate" type="application/rss+xml" title="Optimum Tech blog" href="/blog/index.xml" /><slot name="head" />
-</head>
+<AgentMetadata /></head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header wrap"><a class="logo" href="/" aria-label="Optimum Tech home"><img src="/brand/optimum-logo-cobalt.svg" width="240" height="60" alt="Optimum Tech" /></a><nav aria-label="Main navigation"><a href="/#work">Our work</a><a href="/blog/">Blog</a><a href="mailto:consulting@optimum.ba">Get in touch <span aria-hidden="true">↗</span></a></nav></header>
 <main id="main"><slot /></main>
 <footer class="wrap site-footer"><a href="/" class="footer-name">Optimum Tech</a><span>© {new Date().getFullYear()} Optimum Tech, LLC</span><div><a href="https://github.com/optimumBA">GitHub</a><a href="https://x.com/optimumBA">X</a><a href="https://www.linkedin.com/company/optimum-tech-llc/">LinkedIn</a><a href="/blog/index.xml">RSS</a></div></footer>
 {analytics && <script is:inline defer src="/js/analytics.js"></script>}
-</body></html>
+<SiteInformationLinks /></body></html>

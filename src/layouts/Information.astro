@@ -1,0 +1,13 @@
+---
+import Base from './Base.astro';
+const {title, description} = Astro.props;
+---
+<Base title={title} description={description} analyticsEnabled={false}>
+<section class="wrap information-page">
+<header class="information-heading"><p class="eyebrow">Company information</p><h1>{title}</h1></header>
+<div class="information-body"><slot /></div>
+</section>
+</Base>
+<style>
+.information-page{max-width:940px;padding-block:64px 96px}.information-heading{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:32px}.information-heading h1{font-size:clamp(40px,5vw,64px)}.information-body{max-width:760px;font-size:18px;line-height:1.75;color:var(--slate)}.information-body :global(p){margin-bottom:20px}.information-body :global(h2){font-size:28px;line-height:1.25;margin:40px 0 16px}.information-body :global(a){color:var(--blue)}@media(max-width:600px){.information-page{padding-block:45px 64px}.information-heading{padding-bottom:22px;margin-bottom:24px}.information-body{font-size:17px}}
+</style>
