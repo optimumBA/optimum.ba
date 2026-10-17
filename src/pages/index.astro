@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import {posts} from '../lib/content.js';
 const products = [
-  {name: 'Combobulate', url: 'https://combobulate.dev/', description: 'Build and publish static websites and Vite apps through Telegram.'},
+  {name: 'Combobulate', url: 'https://combobulate.dev/', retired: true, description: 'Earlier product work on building and publishing static websites and Vite apps through Telegram. The former hosted service is retired.'},
   {name: 'ElixirDrops', url: 'https://elixirdrops.net/', description: 'A platform for publishing and discovering practical Elixir and Phoenix tips.', source: 'https://github.com/optimumBA/elixir_drops'},
   {name: 'Skeptic.bot', url: 'https://skeptic.bot/', description: 'Search conspiracy and alternative podcasts, ask questions, and find the episodes behind the answers.', source: 'https://github.com/optimumBA/skeptic_bot'},
 ];
@@ -22,20 +22,31 @@ const archives = [
   {name: 'Dota.ba', repo: 'dotaba', description: 'Our former Bosnian and Balkan Dota community website.'},
 ];
 ---
-<Base home description="Elixir and Phoenix applications, AI features and development workflows. Explore our products and talk to Optimum Tech about your project.">
+<Base home description="Elixir and Phoenix development, faster development feedback, and coding-agent workflows. Work with Almir Sarajčić through Optimum Tech.">
 <section class="hero wrap">
 <p class="eyebrow">Software development and product consulting</p>
 <h1>Good software starts with <span>deciding what matters.</span></h1>
-<div class="hero-bottom"><div><p class="intro">We help teams decide what to build and carry it through to working software.</p><p class="support">Our work covers Elixir and Phoenix applications, AI features, and the development workflows that support them.</p><a class="button" href="mailto:consulting@optimum.ba">Tell us what you’re building <span aria-hidden="true">↗</span></a></div><div class="brand-signature" aria-hidden="true"><img src="/brand/optimum-symbol-cobalt.svg" width="272" height="272" alt="" /></div></div>
+<div class="hero-bottom"><div><p class="intro">We help teams decide what to build and carry it through to working software.</p><p class="support">We build Elixir and Phoenix applications, improve development workflows, and help teams use coding agents effectively.</p><a class="button" href="mailto:consulting@optimum.ba">Tell us what you’re building <span aria-hidden="true">↗</span></a></div><div class="brand-signature" aria-hidden="true"><img src="/brand/optimum-symbol-cobalt.svg" width="272" height="272" alt="" /></div></div>
+</section>
+<section class="journal wrap" id="consulting">
+<div class="section-heading"><p class="eyebrow">Consulting</p><h2>How we can help.</h2></div>
+<div class="work-grid"><div class="work-intro">
+<p>Work with <a href="https://almirsarajcic.com/">Almir Sarajčić</a> through Optimum Tech. He uses coding agents to deliver software and takes responsibility for technical decisions, verification and the final result.</p>
+<p>We agree on a concrete outcome, what is included, the checks that show it works and the handoff you need to keep using it.</p>
+</div><div class="work-list">
+<article class="work-item"><div class="item-top"><h3>Elixir and Phoenix development</h3></div><p>Build a feature, fix a difficult defect or connect your application to another system. Get working software, relevant checks and a handoff your team can use.</p></article>
+<article class="work-item"><div class="item-top"><h3>Development workflows and faster feedback</h3></div><p>Shorten feedback loops while keeping useful checks. Improve builds, tests, CI/CD, preview environments and review practices so your team can develop, verify and deliver changes sooner.</p></article>
+<article class="work-item"><div class="item-top"><h3>Coding-agent workflows</h3></div><p>Help your team use coding agents on real features and repairs. Improve the context, review and verification they need, with guidance your team can use again.</p></article>
+</div></div>
 </section>
 <section class="work-section" id="work"><div class="wrap"><div class="section-heading"><p class="eyebrow">Our products</p><h2>Software we build.</h2></div>
 <div class="work-grid"><div class="work-intro"><p>Software we've built, alongside the work we do with clients.</p></div><div class="work-list">
-<article class="work-item featured"><a class="product-title" href="https://kogen.dev/"><div class="item-top"><h3>Kogen</h3><span aria-hidden="true">↗</span></div></a><p class="kogen-line">Shape the feature. Leave the build to Kogen.</p><p>A software-building system designed around feature shaping, implementation, checks and independent review.</p><div class="product-links"><a class="text-link" href="https://kogen.dev/">Explore Kogen</a><a class="text-link" href="https://github.com/KogenAI/kogen">View source</a></div></article>
-{products.map(product => <article class="work-item"><a class="product-title" href={product.url}><div class="item-top"><h3>{product.name}</h3><span aria-hidden="true">↗</span></div></a><p>{product.description}</p><div class="product-links"><a class="text-link" href={product.url}>Visit {product.name}</a>{product.source && <a class="text-link" href={product.source}>View source</a>}</div></article>)}
+<article class="work-item featured"><a class="product-title" href="https://kogen.dev/"><div class="item-top"><h3>Kogen</h3><span aria-hidden="true">↗</span></div></a><p class="kogen-line">Shape the feature. Leave the build to Kogen.</p><p>A software-building system in development, designed around feature shaping, implementation, checks and independent review.</p><div class="product-links"><a class="text-link" href="https://kogen.dev/">Explore Kogen</a><a class="text-link" href="https://bench.kogen.dev/">Experiments and results</a></div></article>
+{products.map(product => <article class="work-item"><a class="product-title" href={product.url}><div class="item-top"><h3>{product.name}</h3><span aria-hidden="true">↗</span></div></a><p>{product.description}</p><div class="product-links">{!product.retired && <a class="text-link" href={product.url}>Visit {product.name}</a>}{product.source && <a class="text-link" href={product.source}>View source</a>}</div></article>)}
 </div></div>
 <div class="tools-section" id="tools"><div class="minor-heading"><h2>Tools and resources</h2><p>Useful pieces of our work, shared with the Elixir community.</p></div><div class="tools-list">{tools.map(tool => <a class="tool-item" href={tool.url}><div class="item-top"><h3>{tool.name}</h3><span aria-hidden="true">↗</span></div><p>{tool.description}</p></a>)}</div></div>
 <div class="project-archive" id="archive"><div class="minor-heading"><h2>Archived projects</h2><p>Earlier projects, preserved as public code archives. They are no longer maintained.</p></div><ul>{archives.map(project => <li><a href={`https://github.com/optimumBA/${project.repo}`}><span>{project.name}</span><span aria-hidden="true">↗</span></a><p>{project.description}</p></li>)}</ul></div>
 </div></section>
 <section class="journal wrap" id="blog-section"><div class="journal-heading"><div><p class="eyebrow">From the blog</p><h2>Lessons from the work.</h2></div><a class="text-link" href="/blog/">All articles <span aria-hidden="true">↗</span></a></div><p class="archive-note">Writing on Elixir, delivery, and design from the Optimum BH years.</p><div class="article-list">{posts.slice(0,3).map(post => <a class="article-row" href={`/blog/${post.slug}/`}><time datetime={post.date.toISOString()}>{post.date.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})}</time><div><h3>{post.title}</h3><p>{post.author}</p></div><span aria-hidden="true">↗</span></a>)}</div></section>
-<section class="contact wrap" id="contact"><p class="eyebrow">Consulting</p><h2>What are you building?</h2><p>Bring us an application that needs work, a feature you want to build, or a development process that keeps getting in the way. We can help define the scope, work on the implementation, and put useful checks around the result.</p><p>We work on Elixir and Phoenix applications, AI features, code review, CI/CD and coding-agent workflows.</p><a href="mailto:consulting@optimum.ba">consulting@optimum.ba <span aria-hidden="true">↗</span></a></section>
+<section class="contact wrap" id="contact"><p class="eyebrow">Consulting</p><h2>What are you building?</h2><p>Tell us about your application, the outcome you need and the constraints we should know about. We can agree on a useful first piece of work and how to check the result.</p><a href="mailto:consulting@optimum.ba">consulting@optimum.ba <span aria-hidden="true">↗</span></a></section>
 </Base>

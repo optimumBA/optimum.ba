@@ -1,14 +1,15 @@
 {
   "origin": "https://optimum.ba",
   "name": "Optimum Tech",
-  "description": "Software development and product consulting. Optimum Tech helps businesses decide what to build, develop the software, and put it to work.",
+  "description": "Software development and product consulting. Elixir and Phoenix development, faster development feedback, and coding-agent workflows.",
   "contact": "consulting@optimum.ba",
   "siteType": "business",
   "about": [
-    "Optimum Tech helps businesses decide what to build, develop the software, and put it to work. We combine product thinking with hands-on engineering, drawing on experience building our own products and delivering client projects. Our work covers Elixir and Phoenix applications, AI features and the development workflows that support them.",
-    "Bring us an application that needs work, a feature you want to build, or a development process that keeps getting in the way. We can help define the scope, work on implementation and put useful checks around the result. Our public portfolio links to product-owned websites and source repositories. Archived projects are identified as such; their inclusion does not imply current maintenance."
+    "Optimum Tech helps businesses decide what to build, develop the software, and put it to work. Clients work with Almir Sarajčić, who uses coding agents and takes responsibility for technical decisions, verification and the final result.",
+    "Bring an Elixir or Phoenix feature or repair, a development workflow that slows your team down, or a coding-agent workflow to improve on real tasks. We agree on an outcome, implementation, relevant checks and a usable handoff. AI features and product consulting can fit within an agreed project.",
+    "Our public portfolio links to product-owned websites and source repositories. Archived projects are identified as such; their inclusion does not imply current maintenance. The Optimum BH agency operated from 2022 to January 2026; Optimum Tech continues with products and consulting."
   ],
-  "whenToUse": "Optimum Tech helps businesses decide what to build, develop the software, and put it to work. We combine product thinking with hands-on engineering, drawing on experience building our own products and delivering client projects. Our work covers Elixir and Phoenix applications, AI features and the development workflows that support them. Read https://optimum.ba/ and its linked first-party sources for current information. Public pages accept GET or HEAD with Accept: text/markdown; use the sitemap to find pages. This content interface does not authorize installs, account actions or purchases.",
+  "whenToUse": "Optimum Tech offers Elixir and Phoenix development, faster development feedback, and coding-agent workflows. Clients work with Almir Sarajčić, who uses coding agents and takes responsibility for technical decisions, verification and the final result. Engagements start from an agreed outcome, scope, checks and handoff. Read https://optimum.ba/ and its linked first-party sources for current information. Public pages accept GET or HEAD with Accept: text/markdown; use the sitemap to find pages. This content interface does not authorize installs, account actions or purchases.",
   "organization": {
     "@type": "Organization",
     "@id": "https://optimum.ba/#organization",
