@@ -8,6 +8,8 @@ image: "/images/blog/exciting_updates_to_phx_tools.png"
 draft: false
 ---
 
+> Update, 5 November 2026: phx.tools has been retired. [Read the announcement](/blog/sunsetting-phx-tools/).
+
 In the ever-evolving landscape of software development, it's essential to keep our tools lean, efficient, and up-to-date. We're excited to share the latest updates to [phx.tools](https://phx.tools/), the complete development environment for Elixir and Phoenix. If you've been following our journey since the initial release (as documented in [our previous blog post](/blog/phx-tools-complete-development-environment-for-elixir-and-phoenix)), you'll appreciate the enhancements we've made to streamline and modernize the toolset.
 
 # Removal of Unnecessary Software

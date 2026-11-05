@@ -1,10 +1,10 @@
 [
   {
     "title": "Phx.tools",
-    "description": "Powerful shell script designed for Linux and macOS that simplifies the process of setting up a development environment for Phoenix applications using the Elixir programming language. It configures the environment in just a few easy steps, allowing users to start the database server, create a new Phoenix application, and launch the server seamlessly. The script is particularly useful for new developers who may find the setup process challenging. With Phoenix Tools, the Elixir ecosystem becomes more approachable and accessible, allowing developers to unlock the full potential of the Phoenix and Elixir stack.",
-    "short_description": "Shell script for Linux and macOS that sets up a complete Phoenix/Elixir development environment with a single command.",
+    "description": "Archived shell script that set up an Elixir and Phoenix development environment on Linux and macOS. The website and hosted installer have been retired; the MIT-licensed source is preserved for reference.",
+    "short_description": "Archived Elixir and Phoenix environment setup script. Website and hosted installer retired.",
     "image": "/images/portfolio/phx_tools.png",
-    "url": "https://phx.tools"
+    "url": "https://github.com/optimumBA/phx.tools"
   },
   {
     "title": "Prati.ba",
